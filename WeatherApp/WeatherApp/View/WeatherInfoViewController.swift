@@ -2,7 +2,7 @@
 //  WeatherInfoViewController.swift
 //  WeatherApp
 //
-//  Created by AADM504 on 28/3/21.
+//  Created by Rajashree on 28/3/21.
 //
 
 import UIKit
@@ -72,7 +72,6 @@ extension WeatherInfoViewController {
 // MARK: - Table view datasource
 
 extension WeatherInfoViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return suburbsList.count
     }

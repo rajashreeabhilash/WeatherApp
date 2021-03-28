@@ -2,7 +2,7 @@
 //  WeatherInfoModel.swift
 //  WeatherApp
 //
-//  Created by AADM504 on 28/3/21.
+//  Created by Rajashree on 28/3/21.
 //
 
 import Foundation
@@ -43,9 +43,5 @@ extension WeatherInfoModel {
     self.feelsLike = try? container.decodeIfPresent(String.self, forKey: .feelsLike)
     self.humidity = try? container.decodeIfPresent(String.self, forKey: .humidity)
     self.updatedDate = try? container.decode(Date.self, forKey: .updatedDate)
-//        let formatter = DateFormatter.ddMMYYYY
-//        if let date = formatter.date(from: uploadDate) {
-//            self.updatedDate = date
-//        }
   }
 }
