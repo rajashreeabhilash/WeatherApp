@@ -11,7 +11,6 @@
         <!--WeatherInfoViewController-->
         <scene sceneID="oMI-Qq-d6E">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YVT-z8-tY1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="WeatherInfoViewController" title="Weather" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gBp-Bz-4aI" userLabel="WeatherInfoViewController" customClass="WeatherInfoViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XMF-AN-WEX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -26,14 +25,23 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Xl-Fi-qhl">
                                                 <rect key="frame" x="0.0" y="0.0" width="56" height="32"/>
                                                 <state key="normal" title="A - Z"/>
+                                                <connections>
+                                                    <action selector="sortAlphabetically:" destination="gBp-Bz-4aI" eventType="touchUpInside" id="lTM-qj-3cw"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylV-Pm-Oyt">
                                                 <rect key="frame" x="66" y="0.0" width="141.5" height="32"/>
                                                 <state key="normal" title="Temperature"/>
+                                                <connections>
+                                                    <action selector="sortTemp:" destination="gBp-Bz-4aI" eventType="touchUpInside" id="5BD-Md-t5Z"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMD-vy-0MY">
                                                 <rect key="frame" x="217.5" y="0.0" width="156.5" height="32"/>
                                                 <state key="normal" title="Last updated"/>
+                                                <connections>
+                                                    <action selector="sortDatewise:" destination="gBp-Bz-4aI" eventType="touchUpInside" id="dZd-bF-CXh"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -111,6 +119,9 @@
                                     <constraint firstAttribute="height" constant="30" id="yQA-me-5CP"/>
                                 </constraints>
                                 <state key="normal" title="Filter"/>
+                                <connections>
+                                    <action selector="filter:" destination="gBp-Bz-4aI" eventType="touchUpInside" id="rs0-Iq-wdc"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fwz-Y7-6fd"/>
@@ -135,6 +146,7 @@
                         <outlet property="weatherInfoTableView" destination="Run-ai-UZP" id="PhP-mh-Xnf"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YVT-z8-tY1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1142.0289855072465" y="-5.3571428571428568"/>
         </scene>

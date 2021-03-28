@@ -12,9 +12,13 @@ class WeatherInfoViewController: UIViewController {
     
     fileprivate var viewModel = WeatherInfoViewModel()
     private var context = 0
+    private var isFiltered: Bool = false
+    private var suburbsList: [WeatherInfoModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        suburbsList = viewModel.suburbsList
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,10 +30,41 @@ class WeatherInfoViewController: UIViewController {
     }
 }
 
+// MARK: - Action
+
+extension WeatherInfoViewController {
+    @IBAction func sortAlphabetically(_ sender: Any) {
+        suburbsList.sort(by: {$0.name < $1.name })
+        weatherInfoTableView.reloadData()
+    }
+    
+    @IBAction func sortTemp(_ sender: Any) {
+        suburbsList.sort(by: {$0.temperature ?? "100" < $1.temperature ?? "100" })
+        weatherInfoTableView.reloadData()
+    }
+    
+    @IBAction func sortDatewise(_ sender: Any) {
+        suburbsList.sort(by: {$0.updatedDate ?? Date() < $1.updatedDate ?? Date() })
+        weatherInfoTableView.reloadData()
+    }
+    
+    @IBAction func filter(_ sender: Any) {
+        // TODO: Filtering is based on 2 countries for now, need a new controller to display all
+        if (isFiltered) {
+            suburbsList = viewModel.suburbsList.filter({$0.country.name == "Australia"})
+        } else {
+            suburbsList = viewModel.suburbsList.filter({$0.country.name == "New Zealand"})
+        }
+        isFiltered = !isFiltered
+        weatherInfoTableView.reloadData()
+    }
+}
+
 // MARK: - Private methods
 
 extension WeatherInfoViewController {
     @objc private func refreshTable() {
+        suburbsList = viewModel.suburbsList
         self.weatherInfoTableView.reloadData()
     }
 }
@@ -39,14 +74,14 @@ extension WeatherInfoViewController {
 extension WeatherInfoViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.suburbsList.count
+        return suburbsList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let reusableId = "WeatherInfoCell"
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reusableId, for: indexPath) as! WeatherInfoTableViewCell
-        cell.configure(with: viewModel.suburbsList[indexPath.row])
+        cell.configure(with: suburbsList[indexPath.row])
         return cell
     }
 }
@@ -67,7 +102,7 @@ extension WeatherInfoViewController: UITableViewDelegate {
         
         let storyboard = UIStoryboard(name: "WeatherInfo", bundle: Bundle(for: Self.self))
         let viewController = storyboard.instantiateViewController(withIdentifier: "WeatherDetailViewController") as! WeatherDetailViewController
-        viewController.setUpViewModel(with: viewModel.suburbsList[indexPath.row])
+        viewController.setUpViewModel(with: suburbsList[indexPath.row])
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
